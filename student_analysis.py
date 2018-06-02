@@ -45,8 +45,8 @@ def main():
 
 	checkDataset(trainingSet,checkSet,result)
 	result.sort(key=operator.itemgetter(0))
-	for x in range(len(result)):
-		print(result[x])
+	#for x in range(len(result)):
+	#	print(result[x])
 	writeDataset(result)
 
 main()
