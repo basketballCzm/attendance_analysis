@@ -4,7 +4,9 @@ import xlwt
 import xlrd
 import types
 
+# 数据都在第一页名字为Students
 example_sheet = 'Students'
+# 修改.xls名称
 example_name = 'example.xls'
 
 def loadDataset(filename, split_ch, trainingSet=[]):

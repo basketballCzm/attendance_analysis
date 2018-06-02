@@ -16,3 +16,8 @@
 1. config.txt中的样例时间段的选取必须按照给定的格式填写。例如：
 2018-05-15 07:00:00 11:30:00
 2. 每次删除以前生成的.xls文件后再生成新文件。
+3.注意在代码中修改下列数据： 
+数据都在第一页名字为Students
+example_sheet = 'Students'
+修改.xls名称
+example_name = 'example.xls'
