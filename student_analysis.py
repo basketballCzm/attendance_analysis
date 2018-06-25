@@ -50,6 +50,7 @@ def writeDataset(result,checkSet):
 		print str(e)
 
 	table = data.sheet_by_name(example_sheet)
+	#原始表格的长和宽
 	nrows = table.nrows
 	ncols = table.ncols
 	excel_list = []
@@ -72,12 +73,39 @@ def writeDataset(result,checkSet):
 	#添加后面的行
 	for x in range(len(result)):
 		for y in range(len(excel_list)):
+			# 匹配学号
 			if(result[x][0][-3:] == excel_list[y][0][-3:]):
+				# 查看是哪一天
 				for k in range(len(checkSet)):
 					#print (result[x][1][0:10],'  =  ',checkSet[k])
 					if(result[x][1][0:10] == checkSet[k][0]):
 						excel_list[y][ncols+k] = 1
 
+
+	excel_list.append([])
+	# 这里用'gbk'乱码
+	excel_list[-1].append('应到'.decode('utf-8'))
+
+	excel_list.append([])
+	excel_list[-1].append('实到'.decode('utf-8'))
+
+	excel_list.append([])
+	excel_list[-1].append('缺勤'.decode('utf-8'))
+
+	# 下面3行全部为0
+	for x in range(3):
+		for y in range(1,ncols+len(checkSet)):
+			excel_list[-(x+1)].append('')
+
+	for x in range(len(checkSet)):
+		cnt = 0
+		for y in range(nrows):
+			if 1 == excel_list[y][ncols+x]:
+				cnt = cnt + 1
+		excel_list[nrows][ncols+x] = nrows-1
+		excel_list[nrows+1][ncols+x] = cnt
+ 		excel_list[nrows+2][ncols+x] = nrows-cnt-1
+		
 
 	wbk = xlwt.Workbook()
 	sheet = wbk.add_sheet("sheet1")
