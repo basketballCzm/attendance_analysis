@@ -219,7 +219,7 @@ def writeDataset(result,checkSet):
 			if(type(excel_list[row][col]) is types.StringType):
 				excel_list[row][col] = excel_list[row][col].decode('utf-8')
 			sheet.write(row,col,excel_list[row][col])
-	wbk.save("student 2.0.xls")
+	wbk.save("student 3.0.xls")
 
 	#print str(excel_list).decode("string_escape")
 
