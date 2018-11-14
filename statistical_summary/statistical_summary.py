@@ -54,15 +54,16 @@ def loadsingleexcel(filename, singleexcelSet=[]):
 	stumajorcol = -1
 
 	# 校验每个excel中学号,学生姓名,学生班级的行数
+	# debug
 	for x in range(len(excel_list[0])):
 		if excel_list[0][x] == stuID:
-			stuIDcol = col
+			stuIDcol = x
 		elif excel_list[0][x] == stuname:
-			stunamecol = col
+			stunamecol = x
 		elif excel_list[0][x] == stuclass:
-			stuclasscol = col
+			stuclasscol = x
 		elif excel_list[0][x] == stumajor:
-			stumajorcol = col
+			stumajorcol = x
 
 	singleexcelSet.append(stuIDcol)
 	singleexcelSet.append(stunamecol)
@@ -91,16 +92,18 @@ def filterdata(alldataSet, filterdataSet=[]):
 		tmp_stunamecol = alldataSet[x][1]
 		tmp_stuclasscol = alldataSet[x][2]
 		tmp_stumajorcol = alldataSet[x][3]
-		for y in range(len(alldataSet[x][4])):
+		for y in range(1,len(alldataSet[x][4])):
+			#print (len(alldataSet[x][4]))
 			L = []
 			if (1 == len(filterdataSet)):
 				L.append(alldataSet[x][4][y][tmp_stuIDcol])
 				L.append(alldataSet[x][4][y][tmp_stunamecol])
 				L.append(alldataSet[x][4][y][tmp_stuclasscol])
 				L.append(alldataSet[x][4][y][tmp_stumajorcol])
+				print (L)
 				filterdataSet.append(L)
 			else:
-				for k in range(2,len(filterdataSet)):
+				for k in range(1,len(filterdataSet)):
 					# filterdataSet中有相同的数据集
 					if (alldataSet[x][4][y][tmp_stuIDcol] == filterdataSet[k][0]):
 						break
@@ -111,6 +114,7 @@ def filterdata(alldataSet, filterdataSet=[]):
 						L.append(alldataSet[x][4][y][tmp_stuclasscol])
 						L.append(alldataSet[x][4][y][tmp_stumajorcol])
 						filterdataSet.append(L)
+						break
 
 def addextradata(alldataSet, filterdataSet, classnameSet):
 	nrows = len(filterdataSet)
@@ -124,21 +128,21 @@ def addextradata(alldataSet, filterdataSet, classnameSet):
 				continue
 			filterdataSet[x].append(-1)
 
-	'''
+	
 	for x in range(len(filterdataSet)):
 		for y in range(len(alldataSet)):
 			tmp_stuIDcol = alldataSet[y][0]
 			tmp_stunamecol = alldataSet[y][1]
 			tmp_stuclasscol = alldataSet[y][2]
 			tmp_stumajorcol = alldataSet[y][3]
-			for k in range(len(alldataSet[y][4])):
+			for k in range(1,len(alldataSet[y][4])):
 				if (alldataSet[y][4][k][tmp_stuIDcol] == filterdataSet[x][0]):
 					sum = 0
-					for x in range(4,len(alldataSet[y][4][k])):
-						if (x == 0):
+					for z in range(4,len(alldataSet[y][4][k])):
+						if (alldataSet[y][4][k][z] == 0):
 							sum = sum + 1
 					filterdataSet[x][ncols+y] = sum
-	'''
+	
 
 
 def writedatasettoexcel(filterdataSet):
@@ -165,4 +169,5 @@ def main():
 	# print (filterdataSet)
 	addextradata(alldataSet, filterdataSet, classnameSet)
 	writedatasettoexcel(filterdataSet)
+	raw_input("success...")
 main()
