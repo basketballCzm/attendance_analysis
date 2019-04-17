@@ -209,9 +209,8 @@ def writeDataset(result,checkSet):
 				cnt = cnt + 1
 		excel_list[nrows][ncols+x] = nrows-1
 		excel_list[nrows+1][ncols+x] = cnt
- 		excel_list[nrows+2][ncols+x] = nrows-cnt-1
+		excel_list[nrows+2][ncols+x] = nrows-cnt-1
 		
-
 	wbk = xlwt.Workbook()
 	sheet = wbk.add_sheet("sheet1")
 	for row in range(len(excel_list)):
